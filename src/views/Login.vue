@@ -49,43 +49,34 @@
 <script lang="ts">
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
+import http from "../http-common";
+import { useCookies } from "vue3-cookies";
+
 export default {
   setup() {
+    const { cookies } = useCookies();
+    const router = useRouter();
     const data = reactive({
       userName: "",
       password: "",
     });
 
-    const router = useRouter();
-
     const submit = async () => {
-      await fetch(
-        // "http://vantroysanchez-001-site1.etempurl.com/api/Account/Login",
-        "https://localhost:7017/api/Account/Login",
-        {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          //credentials: "include",
-          body: JSON.stringify(data),
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Success:", data);
+      await http
+        .post("/Account/Login", data)
+        .then((res) => {
+          cookies.set("token", res.data.token);
+          router.push("/");
         })
-        .catch((error) => {
-          console.error("Error:", error);
+        .catch((err) => {
+          console.log("Cookies error");
         });
-
-      console.log(JSON.stringify(data));
-      await router.push("/");
     };
 
     return {
       data,
       submit,
+      cookies,
     };
   },
 };
