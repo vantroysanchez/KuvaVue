@@ -1,11 +1,10 @@
 <template>
-  <Nav />
   <div id="rootLogin" class="text-center">
     <main class="form-signin w-100 m-auto">
       <form>
         <img
           class="mb-4"
-          src="../assets/logo.svg"
+          src="../../../assets/logo.svg"
           alt=""
           width="72"
           height="57"
@@ -41,14 +40,11 @@
 </template>
 
 <script lang="ts">
-import Nav from "../components/Nav.vue";
-export default {
-  components: { Nav },
-};
+export default {};
 </script>
 
 <style scoped>
-@import "../assets/css/login/signin.css";
+@import "../../../assets/css/login/signin.css";
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;

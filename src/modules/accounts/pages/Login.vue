@@ -4,7 +4,7 @@
       <form @submit.prevent="submit">
         <img
           class="mb-4"
-          src="../assets/logo.svg"
+          src="../../../assets/logo.svg"
           alt=""
           width="72"
           height="57"
@@ -49,7 +49,7 @@
 <script lang="ts">
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
-import http from "../http-common";
+import http from "../../shared/services/http-common";
 import { useCookies } from "vue3-cookies";
 
 export default {
@@ -83,7 +83,7 @@ export default {
 </script>
 
 <style scoped>
-@import "../assets/css/login/signin.css";
+@import "../../../assets/css/login/signin.css";
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;

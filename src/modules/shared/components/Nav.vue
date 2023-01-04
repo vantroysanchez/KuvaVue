@@ -10,7 +10,7 @@
         >
           <img
             class="bi me-2"
-            src="../assets/logo.svg"
+            src="../../../assets/logo.svg"
             alt=""
             width="40"
             height="30"
