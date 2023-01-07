@@ -21,11 +21,21 @@
         <ul
           class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
         >
-          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+          <li>
+            <router-link to="/" class="nav-link px-2 text-secondary"
+              >Home</router-link
+            >
+          </li>
+          <li>
+            <router-link to="/Header" class="nav-link px-2 text-white"
+              >Headers</router-link
+            >
+          </li>
+          <li>
+            <router-link to="/" class="nav-link px-2 text-white"
+              >Details</router-link
+            >
+          </li>
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -41,9 +51,10 @@
           <router-link to="/login" class="btn btn-outline-light me-2">
             Login
           </router-link>
-          <router-link to="/register" class="btn btn-warning"
+          <router-link to="/register" class="btn btn-warning me-2"
             >Register
           </router-link>
+          <button @click="logout" class="btn btn-danger">Logout</button>
         </div>
       </div>
     </div>
@@ -51,7 +62,24 @@
 </template>
 
 <script lang="ts">
-export default {};
+import { useCookies } from "vue3-cookies";
+
+export default {
+  setup() {
+    const { cookies } = useCookies();
+
+    return {
+      cookies,
+    };
+  },
+
+  methods: {
+    logout() {
+      this.cookies.remove("token");
+      location.reload();
+    },
+  },
+};
 </script>
 
 <style scoped>

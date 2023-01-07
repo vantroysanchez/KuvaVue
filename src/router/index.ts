@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import isAuthenticated from './auth'
 
 const routes =  [
     {
       path: '/',
       name: 'home',
+      beforeEnter: [isAuthenticated],
       component: () => import(/*webpackChunkName: "Home"*/'../modules/shared/pages/Home.vue')
     },
     {
@@ -17,7 +19,14 @@ const routes =  [
       component: () => import(/*webpackChunkName: "Register"*/'../modules/accounts/pages/Register.vue')
     },
     {
+      path: '/header',
+      name: 'header',
+      beforeEnter: [isAuthenticated],
+      component: () => import(/*webpackChunkName: "Register"*/'../modules/headers/pages/index.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
+      beforeEnter: [isAuthenticated],
       //name: 'register',
       component: () => import(/*webpackChunkName: "PageNotFound"*/'../modules/shared/pages/PageNotFound.vue')
     }

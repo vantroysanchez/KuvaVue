@@ -1,4 +1,5 @@
 <template>
+  <Nav />
   <div class="card m-5" v-if="items">
     <div class="card-header">Header</div>
     <div class="card-body">
@@ -31,9 +32,12 @@ import HeaderService from "../../headers/services/HeaderService";
 import type { ListIHeaderOnely } from "../../headers/interfaces/HeaderOnly";
 import type { ResponseData } from "../../shared/interfaces/ResponseData";
 import { ref } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, defineAsyncComponent } from "vue";
 
 export default defineComponent({
+  components: {
+    Nav: defineAsyncComponent(() => import("../../shared/components/Nav.vue")),
+  },
   setup() {
     const items = ref([{}] as ListIHeaderOnely);
 
