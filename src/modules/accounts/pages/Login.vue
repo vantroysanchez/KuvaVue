@@ -40,6 +40,7 @@
         <button class="w-100 btn btn-lg btn-primary" type="submit">
           Sign in
         </button>
+        <span class="text-danger">{{ validationLogin }}</span>
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
       </form>
     </main>
@@ -61,24 +62,32 @@ export default {
       password: "",
     });
 
+    let validationLogin = null;
+
     const submit = async () => {
       await http
         .post("/Account/Login", data)
         .then((res) => {
           cookies.set("token", res.data.token);
+
+          if (res.data.token === "401") {
+            validationLogin = "user or passwork incorrect";
+          }
+
           router.push("/");
         })
-        .catch((err) => {
-          console.log("Cookies error");
-        });
+        .catch((err) => {});
     };
 
     return {
       data,
       submit,
       cookies,
+      validationLogin,
     };
   },
+
+  watch: {},
 };
 </script>
 
