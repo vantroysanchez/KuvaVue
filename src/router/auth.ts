@@ -1,4 +1,3 @@
-import http from "../modules/shared/services/http-common";
 import { useCookies } from "vue3-cookies";
 
 const { cookies } = useCookies();

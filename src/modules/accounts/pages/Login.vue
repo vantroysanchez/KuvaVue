@@ -40,7 +40,7 @@
         <button class="w-100 btn btn-lg btn-primary" type="submit">
           Sign in
         </button>
-        <span class="text-danger">{{ validationLogin }}</span>
+        <span class="text-danger">{{ loginMessage }}</span>
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
       </form>
     </main>
@@ -48,12 +48,12 @@
 </template>
 
 <script lang="ts">
-import { reactive } from "vue";
+import { reactive, defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import http from "../../shared/services/http-common";
 import { useCookies } from "vue3-cookies";
 
-export default {
+export default defineComponent({
   setup() {
     const { cookies } = useCookies();
     const router = useRouter();
@@ -62,7 +62,7 @@ export default {
       password: "",
     });
 
-    let validationLogin = null;
+    let validationLogin = "";
 
     const submit = async () => {
       await http
@@ -87,8 +87,12 @@ export default {
     };
   },
 
-  watch: {},
-};
+  computed: {
+    loginMessage() {
+      //return validationLogin;
+    },
+  },
+});
 </script>
 
 <style scoped>
